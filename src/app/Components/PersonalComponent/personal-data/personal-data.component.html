@@ -1,0 +1,61 @@
+<div class="cards d-flex p-4 gap-4 flex-wrap">
+  <!--   MyAccOunt -->
+  <div class="card p-3 shadow h-100" style="width: 600px">
+    <div class="card-header d-flex justify-content-center">
+      <i
+        class="fa-solid fs-4 pt-1 fa-pen-to-square me-2"
+        (click)="goToEditUser(1)"
+        style="cursor: pointer; color: var(--main-color)"
+      ></i>
+      <h3 class="edit fw-bolder"><strong>Account Details</strong></h3>
+    </div>
+    <div class="card-body">
+      <div class="details d-flex align-items-center gap-3">
+        <div class="avatarr">
+          <img
+            class="AvatarImg rounded-circle border"
+            src="Imges/Avatar.png"
+            width="60"
+            alt="User Avatar"
+          />
+        </div>
+        <div class="info">
+          <h5 class="h6">
+            <span id="username">{{this._AuthService.username() }}</span>
+          </h5>
+          <h5 class="h6 Emaill">
+            <span id="email">{{ userEmail() }}</span>
+          </h5>
+        </div>
+      </div>
+      <hr />
+      <button (click)="goToEditUser(1)" class="btn btn-success w-100">
+        Edit
+      </button>
+    </div>
+  </div>
+
+  <!--   Address -->
+  <div class="card p-3 shadow h-auto" style="width: 600px">
+    <div class="card-header d-flex justify-content-center">
+      <i
+        class="fa-solid fs-4 pt-1 fa-pen-to-square me-2"
+        (click)="goToEditUser(2)"
+        style="cursor: pointer; color: var(--main-color)"
+      ></i>
+      <h3 class="edit fw-bolder"><strong>Address Details</strong></h3>
+    </div>
+    <div class="card-body m-1">
+      <div class="details d-flex align-items-center gap-3">
+        <i class="fa-solid fa-location-dot fs-3 text-success"></i>
+        <div class="Address">
+          <h5 class="h6" id="address"><span>{{city()}}</span></h5>
+          <h5 class="h6"><span id="address2">{{details()}}</span></h5>
+        </div>
+      </div>
+
+      <hr />
+      <button (click)="goToEditUser(2)" class="btn w-100">Edit</button>
+    </div>
+  </div>
+</div>

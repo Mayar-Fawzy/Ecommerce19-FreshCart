@@ -1,0 +1,32 @@
+.AvatarImg{
+    background-color: var(--main-color);
+    border-radius: 50%;
+}
+
+.btn{
+    background-color: var(--main-color);
+    color: white;
+}
+.card{
+    box-shadow: var(--shadow);
+}
+#username , #address{
+    color: var(--main-color);
+}
+.edit{
+    color: var(--main-color);
+}
+
+.card-header{
+    background-color: transparent;
+    padding: 10px;
+   
+}
+@media (max-width:441px) {
+    .info{
+        width: 60% !important;
+    }
+    .card{
+        width: 1500px !important;
+    }
+  }
