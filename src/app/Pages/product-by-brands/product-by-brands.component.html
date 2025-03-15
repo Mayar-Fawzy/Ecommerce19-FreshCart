@@ -1,6 +1,9 @@
 <app-header-type-product [CardCategouryDetHeader]="specificBrand" ></app-header-type-product>
 <div class="container">
+    @if(ProductHere){<app-card-product [CardProducts]="BrandisList"></app-card-product>}
+    @else {
+        <app-nodata></app-nodata>
+    } 
     
-    <app-card-product [CardProducts]="BrandisList"></app-card-product>
     </div>
     

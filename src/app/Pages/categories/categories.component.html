@@ -3,6 +3,7 @@
         @if (isloading) {
         <div class="container my-2">
           <div class="row">
+            
             @for (_ of [1,2,3,4,5,6,7,8,9,10,11,12]; track $index) {
             <div class="col-md-3 mb-4">
               <ngx-skeleton-loader
@@ -32,7 +33,9 @@
           </div>
         </div>
         } @else {
+          
             <app-card-category [CardCategoury]="CategourisList"></app-card-category>
+         
         }
       </div>
       

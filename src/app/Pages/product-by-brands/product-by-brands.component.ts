@@ -5,14 +5,16 @@ import { ActivatedRoute } from '@angular/router';
 import { BrandsService } from '../../core/Services/brands.service';
 import { CardProductComponent } from '../../Components/Products/card-product/card-product.component';
 import { ICardProducts, IshredCardProduct } from '../../core/interfaces/card-products';
+import { NodataComponent } from '../../Components/nodata/nodata.component';
 
 @Component({
   selector: 'app-product-by-brands',
-  imports: [HeaderTypeProductComponent, CardProductComponent],
+  imports: [HeaderTypeProductComponent, NodataComponent,CardProductComponent],
   templateUrl: './product-by-brands.component.html',
   styleUrl: './product-by-brands.component.scss',
 })
 export class ProductByBrandsComponent {
+  ProductHere: boolean = true;
   private readonly _BrandsService = inject(BrandsService);
   private readonly _ActivatedRoute = inject(ActivatedRoute);
 
@@ -45,6 +47,12 @@ export class ProductByBrandsComponent {
       next: ({ data }) => {
         this.BrandisList = data;
         console.log('Fetched Category Data:', this.BrandisList);
+        if( this.BrandisList.length > 0){
+          this.ProductHere=true
+        }
+        else{
+          this.ProductHere=false
+        }
       },
       error: (err) => {
         console.error('Error fetching category by ID:', err);

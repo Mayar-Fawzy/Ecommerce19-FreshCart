@@ -17,23 +17,27 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
   styleUrls: [ '../../core/Shared/Css/SharedStylee.css','./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  isloading:boolean=true
+  isloading: boolean = true;
+ 
   CategourisList: ICategouryIbrands[] = [];
   private readonly _CategoriesService = inject(CategoriesService);
-   
 
-  ngOnInit(): void {this.GetAll()}
-  
-  GetAll(){
+  ngOnInit(): void {
+    this.GetAll();
+  }
+
+  GetAll() {
     this._CategoriesService.getAllCategories().subscribe({
       next: (res) => {
+       
         this.CategourisList = res.data;
-        this.isloading=false
+        this.isloading = false;
+       
       },
       error: (err) => {
         console.error('Error fetching all categories:', err);
+        this.isloading = false;
       },
     });
   }
- 
 }

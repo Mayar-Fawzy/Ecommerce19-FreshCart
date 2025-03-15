@@ -1,7 +1,7 @@
 <app-header-type-product [isloadingH]="isloading" [CardCategouryDetHeader]="specificCategory" ></app-header-type-product>
 <div class="container">
-   
-    @if (isloading) {
+   @if(ProductHere){
+     @if (isloading) {
         <div class="container">
           <div class="row">
             @for (_ of [1,2,3,4,5,6,7,8,9,10,11,12]; track $index) {
@@ -46,4 +46,9 @@
             <app-card-product   [CardProducts]="CategourisList"></app-card-product>
         </div>
         }
+   }
+   @else {
+   <app-nodata/>
+   }
+   
          </div>
