@@ -1,9 +1,10 @@
-import { Component, computed, inject,  Signal} from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject,  Signal} from '@angular/core';
 import { Router} from '@angular/router';
 import { RoutingModule } from '../../../core/Shared/Module/routing/routing.module';
 import { CartService } from '../../../core/Services/cart.service';
 import { WishlistService } from '../../../core/Services/wishlist.service';
 import { AuthService } from '../../../core/Services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -16,21 +17,36 @@ export class NavbarComponent {
   
   isopen:boolean=false;
   isToken:boolean=true;
-  Show: boolean = false;
+  Show: boolean = false; 
+  isMenuOpen = false; // الحالة الافتراضية للقائمة
+
   toggleMenue(){
     this.isopen=!this.isopen;
   }
   toggleShow() {
     this.Show = !this.Show;
-  
+    this.isMenuOpen = false;
   }
-  isMenuOpen = false; // الحالة الافتراضية للقائمة
-
+ 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen; // تبديل الحالة عند النقر
+    this.isMenuOpen = !this.isMenuOpen;
+    this.Show=false;
+     // تبديل الحالة عند النقر
+  }
+  // لو داس برا الايليمين ف اي مكان ف الصفحه يقفلها
+  constructor(private eRef: ElementRef) {}
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+    this.isMenuOpen = false;
+    this.Show=false;
+        // إغلاق القائمة الرئيسية
+      
+    }
   }
   private readonly _CartService = inject(CartService);
   private readonly _Router = inject(Router);
+  private readonly _ToastrService = inject(ToastrService);
   protected readonly _AuthService = inject(AuthService);
   private readonly _WishlistService = inject(WishlistService);
   
@@ -47,12 +63,14 @@ export class NavbarComponent {
     
   if(!localStorage.getItem('userToken')){
     this.isToken=false 
+   
   }
-  
-    this._CartService.GetProductsCart().subscribe({
+ 
+     this._CartService.GetProductsCart().subscribe({
       next: (res) => {
         console.log('cart items', res);
         this._CartService.countNumber.set(res.numOfCartItems);
+
 
       },
     });
@@ -62,6 +80,8 @@ export class NavbarComponent {
         this._WishlistService.countNumberWish.set(res.count);
       },
     });
+  
+   
     this.userEmail = localStorage.getItem('EmailUser')!;
    
      console.log("UserData",this._AuthService.userData)

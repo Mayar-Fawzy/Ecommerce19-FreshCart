@@ -31,7 +31,13 @@ export class CardProductComponent{
 
  
   addToWishList(productId: string) {
-    this._WishlistService.Addproducttowishlist(productId).subscribe({
+    if(!localStorage.getItem('userToken')){
+      this.msgError='Please login to add product to wishlist';
+      this._ToastrService.error(this.msgError,'FreshCart')
+      return;
+    }
+    else{
+      this._WishlistService.Addproducttowishlist(productId).subscribe({
       next: (res) => {
            this.WishLisst=res.data;
            this._ToastrService.success('Product Added to Wishlist', 'Success');
@@ -46,11 +52,24 @@ export class CardProductComponent{
 
       error: (err) => {
         console.log(err);
+        this.msgError = err.error.message;
+        this._ToastrService.error(this.msgError, 'FreshCart', { timeOut: 2000 });
+      
       },
     });
+    }
+    
+    
   }
   addToCart(productId: string) {
-    this._CartService.addProductToCart(productId).subscribe({
+    
+    if(!localStorage.getItem('userToken')){
+   this.msgError='Please login to add product to Cart';
+      this._ToastrService.error(this.msgError,'FreshCart')
+      return;
+    }
+    else{
+       this._CartService.addProductToCart(productId).subscribe({
       next: (data) => {
         this._CartService.countNumber.set(data.numOfCartItems);
         this._ToastrService.success('Product added to cart', 'FreshCart', {timeOut: 3000});
@@ -64,7 +83,9 @@ export class CardProductComponent{
         this._Router.navigate(['/auth/login']);
       },
     });
-
+    }
+   
+     
 }  }
 
  

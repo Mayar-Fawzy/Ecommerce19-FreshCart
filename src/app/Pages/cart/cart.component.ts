@@ -28,12 +28,16 @@ export class CartComponent {
   }
   ShowProductsInCart() {
     
+    if(localStorage.getItem('userToken')){
     this._CartService.GetProductsCart().subscribe(({ data }) => {
       this.isloading = false;
       this.ProductsInCart = data;
 
       console.log(this.ProductsInCart);
-    });
+    });}
+    else{
+      console.log("4555")
+    }
   }
   RemoveAll() {
     Swal.fire({
