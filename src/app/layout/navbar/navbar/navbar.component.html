@@ -143,12 +143,12 @@
 
     </div>
     <i class="fa-solid fa-bars" (click)="toggleMenue()"></i>
-    <div class="menueForResponsive " [ngClass]="isopen ? 'Show' : ''">
+    <div class="menueForResponsive  rounded-5" [ngClass]="isopen ? 'Show' : ''">
       @if(isToken){
       <div class="listMenue">
         <i class="fa-solid fa-grip fs-2 mx-4 my-3" (click)="toggleMenu()"></i>
       
-        <nav *ngIf="isMenuOpen" class="menu-container">
+        <nav *ngIf="isMenuOpen" class="menu-container rounded-4">
           <ul class="d-flex gap-3 list-unstyled m-0 flex-column">
             <li><a (click)="toggleMenu()" routerLink="/home">Home</a></li>
             <li><a (click)="toggleMenu()" routerLink="/Product">Products</a></li>

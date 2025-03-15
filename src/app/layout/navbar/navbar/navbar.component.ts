@@ -22,7 +22,7 @@ export class NavbarComponent {
   }
   toggleShow() {
     this.Show = !this.Show;
-    
+  
   }
   isMenuOpen = false; // الحالة الافتراضية للقائمة
 
