@@ -6,15 +6,17 @@ import { BrandsService } from '../../core/Services/brands.service';
 import { CardProductComponent } from '../../Components/Products/card-product/card-product.component';
 import { ICardProducts, IshredCardProduct } from '../../core/interfaces/card-products';
 import { NodataComponent } from '../../Components/nodata/nodata.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-product-by-brands',
-  imports: [HeaderTypeProductComponent, NodataComponent,CardProductComponent],
+  imports: [HeaderTypeProductComponent,NgxSkeletonLoaderModule, NodataComponent,CardProductComponent],
   templateUrl: './product-by-brands.component.html',
   styleUrl: './product-by-brands.component.scss',
 })
 export class ProductByBrandsComponent {
   ProductHere: boolean = true;
+  isloading:boolean=true;
   private readonly _BrandsService = inject(BrandsService);
   private readonly _ActivatedRoute = inject(ActivatedRoute);
 
@@ -53,6 +55,7 @@ export class ProductByBrandsComponent {
         else{
           this.ProductHere=false
         }
+        this.isloading=false
       },
       error: (err) => {
         console.error('Error fetching category by ID:', err);
@@ -65,6 +68,7 @@ export class ProductByBrandsComponent {
       next: ({ data }) => {
         this.specificBrand = data;
         console.log('Fetched Products Data:', this.specificBrand);
+        this.isloading=false
       },
       error: (err) => {
         console.error('Error fetching products by category:', err);
