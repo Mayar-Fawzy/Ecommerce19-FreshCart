@@ -75,14 +75,14 @@
     </div>
     <div class="PersonalData">
       <div class="avatarr" (click)="toggleShow()">
-        <img class="AvatarImg" [src]="imgUrl" width="35" alt="" />
+        <img class="AvatarImg"  [src]="profileImage" width="35" alt="" />
       </div>
       <div class="Person shadow-lg" [ngClass]="Show ? 'Show' : ' '">
         <h3 class="h5 m-0">User Profile</h3>
         <hr />
         <div class="info d-flex align-items-center gap-4">
           <div class="imggg">
-            <img class="AvatarImg" [src]="imgUrl" width="50" alt="" />
+            <img class="AvatarImg"  [src]="profileImage" width="50" alt="" />
           </div>
 
           <div class="infoFrontofPhoto">
@@ -183,7 +183,7 @@
 
         
         <div class="avatarr" (click)="toggleShow()">
-          <img class="AvatarImg" [src]="imgUrl" width="35" alt="" />
+          <img class="AvatarImg"  [src]="profileImage" width="35" alt="" />
         </div>
         <div class="Person text-center shadow-lg" [ngClass]="Show ? 'Show' : ' '">
          
@@ -192,7 +192,7 @@
           
             <div class="infoFrontofPhoto d-flex
             p-1">
-              <img class="AvatarImg my-1" [src]="imgUrl" width="30" height="40" alt="" />
+              <img class="AvatarImg my-1"  [src]="profileImage" width="30" height="40" alt="" />
               <p style="margin-left: 4px; padding-top:11px; padding-right: 20x; "class="text-center">{{ this._AuthService.username() }}</p>
          
             </div>

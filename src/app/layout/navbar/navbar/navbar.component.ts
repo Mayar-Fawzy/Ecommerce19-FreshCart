@@ -12,7 +12,7 @@ import { AuthService } from '../../../core/Services/auth.service';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  imgUrl=localStorage.getItem('uploadedImage');
+  profileImage: string = '';
   
   isopen:boolean=false;
   isToken:boolean=true;
@@ -41,6 +41,10 @@ export class NavbarComponent {
  
   userEmail: string = '';
   ngOnInit(): void {
+    this._AuthService.profileImage$.subscribe((image) => {
+      this.profileImage = image;
+    });
+    
   if(!localStorage.getItem('userToken')){
     this.isToken=false 
   }

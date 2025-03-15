@@ -2,11 +2,11 @@
   <div class="container w-75 h-100 my-5">
     <div class="profile-container p-4">
       <div class="avatarr profile-header">
-        <img [src]="imageUrl" class="AvatarImg"  alt="User Avatar" />
+        <img [src]="profileImage" class="AvatarImg"  alt="User Avatar" />
         <!-- <i class="fa fa-camera upload-icon1"></i> -->
       </div>
        <!-- إدخال مخفي لاختيار الصورة -->
-  <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+  <input type="file" #fileInput (change)="onPhotoUpload($event)" hidden>
       <div class="mt-4">
         <button (click)="fileInput.click()" class="btn btn-upload w-100">
           <i class="fa fa-upload"></i> Upload Photo

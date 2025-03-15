@@ -12,10 +12,14 @@ import { AuthService } from '../../../core/Services/auth.service';
 })
 export class PersonalDataComponent {
   @Output() tabChange = new EventEmitter<number>();
-  imgUrl=localStorage.getItem('uploadedImage');
+  profileImage: string = '';
   protected readonly _AuthService = inject(AuthService);
 
-  
+  ngOnInit() {
+    this._AuthService.profileImage$.subscribe((image) => {
+      this.profileImage = image;
+    });
+  }
   userEmail = signal<string>(localStorage.getItem('EmailUser') || '');
   city = this._AuthService.city; 
   details = this._AuthService.details;
