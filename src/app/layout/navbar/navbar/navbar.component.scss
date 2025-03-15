@@ -38,10 +38,7 @@
   
 }
 
-.AvatarImg{
-    background-color: var(--main-color);
-    border-radius: 50%;
-}
+
 .btn-LogOut{
     background-color: var(--main-color);
        display: block; width: 100%;
@@ -233,4 +230,11 @@ border-radius: 5px
    padding-top: 10px !important;
    padding-bottom: 0px !important;
  }
- 
+ .AvatarImg {width: 45px;
+    height: 42px;
+    border-radius: 50%; /* جعل الصورة دائرية */
+    object-fit: cover; /* جعل الصورة تتناسب مع الإطار */
+    border: 2px solid #fff; /* إضافة إطار أبيض */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  }
+  

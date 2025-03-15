@@ -12,6 +12,8 @@ import { AuthService } from '../../../core/Services/auth.service';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  imgUrl=localStorage.getItem('uploadedImage');
+  
   isopen:boolean=false;
   isToken:boolean=true;
   Show: boolean = false;

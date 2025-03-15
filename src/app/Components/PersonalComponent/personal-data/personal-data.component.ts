@@ -12,7 +12,7 @@ import { AuthService } from '../../../core/Services/auth.service';
 })
 export class PersonalDataComponent {
   @Output() tabChange = new EventEmitter<number>();
-
+  imgUrl=localStorage.getItem('uploadedImage');
   protected readonly _AuthService = inject(AuthService);
 
   

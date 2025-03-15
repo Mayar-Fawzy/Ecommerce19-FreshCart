@@ -28,5 +28,36 @@ export class ShowAddressComponent {
     this._AuthService.username.set(this.myInput.nativeElement.value);
     console.log("Navigate",this.myInput.nativeElement.value);
   }
+  imageUrl: string | null = null; // تخزين رابط الصورة للعرض
+ ngOnInit(): void {
+  this.loadFromLocalStorage();
+ }
 
-}
+ onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        localStorage.setItem('uploadedImage', base64String); // حفظ في localStorage
+        this.imageUrl = base64String; // تحديث الصورة للعرض
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  loadFromLocalStorage() {
+    this.imageUrl = localStorage.getItem('uploadedImage'); // استرجاع الصورة المخزنة
+  }
+  clearLocalStorage() {
+    localStorage.removeItem('uploadedImage'); // حذف الصورة من التخزين
+    this.imageUrl = null;
+  }
+ }
+  
+
+
+  
+

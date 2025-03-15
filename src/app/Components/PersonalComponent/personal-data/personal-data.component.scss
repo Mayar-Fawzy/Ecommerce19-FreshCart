@@ -1,7 +1,4 @@
-.AvatarImg{
-    background-color: var(--main-color);
-    border-radius: 50%;
-}
+
 
 .btn{
     background-color: var(--main-color);
@@ -29,4 +26,10 @@
     .card{
         width: 1500px !important;
     }
+  }
+  img {
+    width: 91px;
+    height: 90px;
+    border-radius: 50%;
+    border: 4px solid #ddd;
   }
