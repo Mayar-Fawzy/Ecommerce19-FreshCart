@@ -269,4 +269,30 @@ border-radius: 5px
     border: 2px solid #fff; /* إضافة إطار أبيض */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
   }
+//   Toolliip
+.tooltip-email {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--main-color); /* لون أزرق حديث */
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .tooltip-email:hover {
+    color: var(--sucesss); /* تغيير اللون عند المرور */
+  }
+  
+  .tooltip-email p {
+    margin: 0;
+    display: inline;
+  }
+  
+  .tooltip-email::after {
+    /* أيقونة صغيرة تشير لوجود التفاصيل */
+    font-size: 12px;
+    margin-left: 5px;
+  }
   

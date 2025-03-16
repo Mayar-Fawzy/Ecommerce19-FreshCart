@@ -5,10 +5,13 @@ import { CartService } from '../../../core/Services/cart.service';
 import { WishlistService } from '../../../core/Services/wishlist.service';
 import { AuthService } from '../../../core/Services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { CutPipe } from '../../../core/Pipes/cut.pipe';
+import { Tooltip, TooltipModule } from 'primeng/tooltip';
 
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-navbar',
-  imports: [RoutingModule],
+  imports: [RoutingModule,TooltipModule,Tooltip, InputTextModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -57,6 +60,7 @@ export class NavbarComponent {
  
   userEmail: string = '';
   ngOnInit(): void {
+   
     this._AuthService.profileImage$.subscribe((image) => {
       this.profileImage = image;
     });
