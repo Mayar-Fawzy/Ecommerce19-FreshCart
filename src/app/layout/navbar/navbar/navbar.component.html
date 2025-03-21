@@ -48,7 +48,7 @@
       </li>
     </ul>
   </nav>
-  @if( isToken) {
+  @if(isToken()) {
 
   <div class="rightSide d-flex align-items-center gap-3">
     <div class="socialIcons d-flex align-items-center gap-2">
@@ -86,13 +86,12 @@
           <div class="infoFrontofPhoto">
             <h5>{{ this._AuthService.username() }}</h5>
             <a
-            pTooltip="{{ userEmail }}"
-            tooltipPosition="bottom"
-            class="tooltip-email"
-          >
-            <p>{{ userEmail.slice(0, 9) }}...</p>
-          </a>
-          
+              pTooltip="{{ userEmail }}"
+              tooltipPosition="bottom"
+              class="tooltip-email"
+            >
+              <p>{{ userEmail.slice(0, 9) }}...</p>
+            </a>
           </div>
         </div>
         <hr />
@@ -142,7 +141,7 @@
     <div class=""></div>
     <i class="fa-solid fa-bars" (click)="toggleMenue()"></i>
     <div class="menueForResponsive rounded-5" [ngClass]="isopen ? 'Show' : ''">
-      @if(isToken){
+      @if(isToken()){
       <div class="listMenue">
         <i class="fa-solid fa-grip fs-2 mx-4 my-3" (click)="toggleMenu()"></i>
 
@@ -207,9 +206,7 @@
               >
                 {{ this._AuthService.username() }}
               </p>
-              
             </div>
-            
           </div>
           <hr />
           <div (click)="toggleShow()">

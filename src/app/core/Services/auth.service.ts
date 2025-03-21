@@ -4,6 +4,7 @@ import { Environment } from '../../Environments/Environment';
 import { HttpClient } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,9 @@ export class AuthService {
   private defaultImage = '/Imges/Avatar.png';
   private profileImageSource = new BehaviorSubject<string>(this.getStoredImage());
   profileImage$ = this.profileImageSource.asObservable();
+  isToken = signal<boolean>(!!localStorage.getItem('userToken'));
 
+  private readonly _Router = inject(Router);
   constructor(private http: HttpClient) {}
 
   updateProfileImage(newImageUrl: string) {
@@ -36,12 +39,7 @@ export class AuthService {
     );
   }
 
-  login(userdata: any): Observable<any> {
-    return this._HttpClient.post(
-      `${Environment.baseUrl}/api/v1/auth/signin`,
-      userdata
-    );
-  }
+ 
 
   register(userdata: any): Observable<any> {
     return this._HttpClient.post(
@@ -92,14 +90,30 @@ export class AuthService {
     );
   }
 
+  login(userdata: any): Observable<any> {
+    return this._HttpClient.post(
+      `${Environment.baseUrl}/api/v1/auth/signin`,
+      userdata
+    ).pipe(
+      tap(response => {
+     
+        this.isToken.set(true); // ✅ تحديث حالة isToken بعد تسجيل الدخول
+        this.saveuserdata(); // تحديث بيانات المستخدم
+      })
+    );
+  }
+  
   logout() {
     localStorage.removeItem('userToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('profileImage'); // مسح الصورة من localStorage أيضًا
+    localStorage.removeItem('EmailUser');
+    localStorage.removeItem('profileImage'); 
     this.userData = null;
     this.profileImageSource.next(this.defaultImage);
-    this.username.set(''); // إعادة تعيين اسم المستخدم عند تسجيل الخروج
+    this.username.set('');
+    this.isToken.set(false); // ✅ تحديث isToken بعد تسجيل الخروج
+    this._Router.navigate(['/auth/login']);
   }
+  
 
   getuserlogged(): boolean {
     return localStorage.getItem('userToken') ? true : false;

@@ -20,13 +20,11 @@ export class NavbarComponent {
   profileImage: string = '';
   
   isopen:boolean=false;
-  isToken:boolean=true;
+
   Show: boolean = false; 
   isMenuOpen = false; // الحالة الافتراضية للقائمة
   constructor(private eRef: ElementRef){
-    if(!localStorage.getItem('userToken')){
-      this.isToken=false
-    }
+   
   }
   toggleMenue(){
     this.isopen=!this.isopen;
@@ -59,11 +57,11 @@ export class NavbarComponent {
   private readonly _WishlistService = inject(WishlistService);
   
   countt: Signal<number> = computed(() => this._CartService.countNumber());
-   
+  isToken = computed(() => this._AuthService.isToken()); 
   counttWish: Signal<number> = computed(() => this._WishlistService.countNumberWish());
   islogin=this._AuthService.getuserlogged()
  
-  userEmail: string = '';
+  userEmail:string =localStorage.getItem('EmailUser')!;
   ngOnInit(): void {
    
     this._AuthService.profileImage$.subscribe((image) => {
@@ -88,7 +86,7 @@ export class NavbarComponent {
     });
   
    
-    this.userEmail = localStorage.getItem('EmailUser')!;
+
    
      console.log("UserData",this._AuthService.userData)
   }
@@ -96,8 +94,6 @@ export class NavbarComponent {
   logout(){  
    
     this._AuthService.logout();
-    this._Router.navigate(['/auth/login']);
-    localStorage.removeItem('userToken');
-    this.isToken=true
+    
   }
 }
