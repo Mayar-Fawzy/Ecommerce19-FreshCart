@@ -16,13 +16,18 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+
   profileImage: string = '';
   
   isopen:boolean=false;
   isToken:boolean=true;
   Show: boolean = false; 
   isMenuOpen = false; // الحالة الافتراضية للقائمة
-
+  constructor(private eRef: ElementRef){
+    if(!localStorage.getItem('userToken')){
+      this.isToken=false
+    }
+  }
   toggleMenue(){
     this.isopen=!this.isopen;
   }
@@ -37,7 +42,7 @@ export class NavbarComponent {
      // تبديل الحالة عند النقر
   }
   // لو داس برا الايليمين ف اي مكان ف الصفحه يقفلها
-  constructor(private eRef: ElementRef) {}
+
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
@@ -65,10 +70,7 @@ export class NavbarComponent {
       this.profileImage = image;
     });
     
-  if(!localStorage.getItem('userToken')){
-    this.isToken=false 
-   
-  }
+ 
  
      this._CartService.GetProductsCart().subscribe({
       next: (res) => {
@@ -94,9 +96,8 @@ export class NavbarComponent {
   logout(){  
    
     this._AuthService.logout();
-
     this._Router.navigate(['/auth/login']);
-    localStorage.removeItem('userToken')
+    localStorage.removeItem('userToken');
     this.isToken=true
   }
 }

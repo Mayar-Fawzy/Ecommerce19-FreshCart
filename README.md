@@ -20,9 +20,8 @@ FreshCart is a modern eCommerce platform built with **Angular 19**, designed for
 ![Cart Page](/public/ReadMeImg/Cart.png)
 ![Personal Page](/public/ReadMeImg/Personal.png)
 ![Res](/public/ReadMeImg/Res1.png)
-![Res](/public/ReadMeImg/Res2.png)
 ![sKelton](/public/ReadMeImg/Skelton.png)
-![Details](/public/ReadMeImg/Details.png)
+![Details](/public/ReadMeImg/Screenshot%20(970).png)
 
 ## 🛠️ Technologies Used
 - **Angular 19** - Frontend Framework
