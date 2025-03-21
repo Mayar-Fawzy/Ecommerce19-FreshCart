@@ -169,7 +169,7 @@ border-radius: 5px
 } 
     .Menuee.ShowMenue{
         opacity: 1;
-        max-height: 500px;
+        max-height: -24px;
         transition: 1s opacity ease-in, 1s  max-height ease-in-out;
       
     }

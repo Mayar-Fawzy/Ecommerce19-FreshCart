@@ -1,37 +1,41 @@
 # FreshCart - Angular eCommerce Platform
 
-![FreshCart Banner](path-to-your-image)
+![FreshCart Banner](/public/ReadMeImg/HomeASL.png)
 
 ## 📌 Introduction
-FreshCart is a modern, feature-rich eCommerce platform built using **Angular**. It provides a seamless shopping experience with a responsive design, user authentication, product management, and a dynamic cart system.
+FreshCart is a modern eCommerce platform built with **Angular 19**, designed for seamless online shopping. It leverages **Observables** and **Interfaces** for efficient data handling and follows a **responsive design** to ensure a great experience on all devices.
 
 ## 🚀 Features
-- 🛒 **User-friendly shopping cart** with real-time updates.
-- 🔐 **Authentication & Authorization** (Login, Register, JWT Token).
-- 📦 **Product Management** (Categories, Search, Filtering, Sorting).
+- 🛒 **Dynamic Shopping Cart** with real-time updates using Observables.
+- 🔐 **User Authentication & Authorization** (JWT-based login and signup).
+- 📦 **Product Management** (CRUD operations, filtering, sorting, and categorization).
 - 🏪 **Admin Dashboard** to manage products, orders, and users.
-- 💳 **Payment Integration** with secure checkout.
-- 📱 **Fully Responsive** for mobile and desktop.
-- 🔍 **Optimized Performance** with lazy loading.
+- 🌍 **Fully Responsive UI** optimized for mobile and desktop views.
+- ⚡ **Optimized Performance** with lazy loading.
+- 🎨 **Bootstrap & Tailwind CSS** for a clean and modern design.
 
 ## 🖼️ Screenshots
-![Home Page](./public/Imges/banner-4.jpeg)
-![Product Page](path-to-your-image)
-![Cart Page](path-to-your-image)
-![Admin Dashboard](path-to-your-image)
+![Home Page](/public/ReadMeImg/Baanner.png)
+![Product Page](/public/ReadMeImg/product.png)
+![Cart Page](/public/ReadMeImg/Cart.png)
+![Personal Page](/public/ReadMeImg/Personal.png)
+![Res](/public/ReadMeImg/Res1.png)
+![Res](/public/ReadMeImg/Res2.png)
+![sKelton](/public/ReadMeImg/Skelton.png)
+![Details](/public/ReadMeImg/Details.png)
 
 ## 🛠️ Technologies Used
-- **Angular** - Frontend Framework
+- **Angular 19** - Frontend Framework
 - **TypeScript** - Strongly Typed Language
-- **RxJS** - Reactive Programming
+- **RxJS (Observables)** - Reactive Programming
 - **Bootstrap / Tailwind CSS** - UI Styling
-- **Firebase / Node.js (Optional)** - Backend & Authentication
+- **Node.js / Firebase (Optional)** - Backend & Authentication
 - **MongoDB / MySQL** - Database (optional)
 
 ## 📥 Installation
 ### Clone the Repository
 ```bash
-git clone https://github.com/yourusername/FreshCart.git
+git clone https://github.com/Mayar-Fawzy/Ecommerce19-FreshCart
 cd FreshCart
 ```
 ### Install Dependencies
@@ -46,8 +50,8 @@ Open [http://localhost:4200](http://localhost:4200) in your browser.
 
 ## 🔧 Configuration
 - Add your API keys in `environment.ts`
-- Configure backend (if applicable)
-- Update Firebase or Database settings (if used)
+- Configure backend services (if applicable)
+- Update Firebase or database settings (if used)
 
 ## 📜 License
 This project is open-source and available under the **MIT License**.
@@ -57,9 +61,8 @@ We welcome contributions! Feel free to submit a pull request.
 
 ## 📞 Contact
 For any inquiries, reach out via:
-- 📧 Email: your-email@example.com
-- 🐦 Twitter: [@yourhandle](https://twitter.com/yourhandle)
-- 🌍 Website: [yourwebsite.com](https://yourwebsite.com)
+- 📧 Email: mayarfawzym28@gmail.com.com
+
 
 Happy Coding! 🚀
 
