@@ -93,8 +93,8 @@ input {
     width: 8% !important;
   }
 }
-:host ::ng-deep .p-inputtext {
+
+::ng-deep .p-inputtext {
   background-color: white !important;
   color: black !important;
-  border: 1px solid #ccc !important;
 }
