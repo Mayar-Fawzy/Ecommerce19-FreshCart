@@ -15,9 +15,10 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-login',
   imports: [RoutingModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['../auth-shared.scss', './login.component.scss'],
 })
 export class LoginComponent {
+  showPassword = false;
   private readonly _AuthService = inject(AuthService);
   private readonly _ToastrService = inject(ToastrService);
   private readonly _Router = inject(Router);

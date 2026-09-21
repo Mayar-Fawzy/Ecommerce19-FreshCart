@@ -1,125 +1,228 @@
-<section class="container rounded-4 shadow p-3 my-2 mb-3">
-  <h1 class="fw-bolder colorr center py-2">Register</h1>
-  <form [formGroup]="registerform" (ngSubmit)="registerSubmit()">
-    <div class="my-1 py-1">
-      <label for="name" class="fw-bold">Name</label>
-      <input
-        formControlName="name"
-        id="name"
-        type="text"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': CheckFieldValid('name'),
-          'is-invalid': CheckFieldInvalid('name')
-        }"
-      />
-      @if(registerform.get('name')?.errors&&registerform.get('name')?.touched){
-      <div class="text-danger mt-1">
-        @if(registerform.get('name')?.getError ('required')){
-        <p>Name Is Required</p>
-        } @else if(registerform.get('name')?.getError('minlength')){
-        <p>Name Should Be more than or equals 3 chars</p>
-        } @else if(registerform.get('name')?.getError('maxlength')){
-        <p>Name Should Be less than or equals 20 chars</p>
-        }
-      </div>
-      }
-    </div>
-    <div class="my-1 py-1">
-      <label for="email" class="fw-bold">Email</label>
+<section class="auth-page">
+  <div class="auth-card auth-card--wide">
+    <aside class="brand-panel">
+      <span class="brand-badge"><i class="fa-solid fa-leaf"></i> FreshCart</span>
 
-      <input
-        formControlName="email"
-        id="email"
-        type="text"
-        class="form-control"
-        [ngClass]="{
-          'is-invalid': CheckFieldInvalid('email'),
-          'is-valid': CheckFieldValid('email')
-        }"
-      />
+      <div>
+        <h2 class="brand-title">Create your FreshCart account</h2>
+        <p class="brand-text">
+          Join thousands of shoppers and get your favourite products delivered fast, with a
+          smoother checkout every time.
+        </p>
+      </div>
 
-      @if(registerform.get('email')?.errors&&registerform.get('email')?.touched){
-      <div class="text-danger mt-1">
-        @if(registerform.get('email')?.getError('required')){
-        <p>email Is Required</p>
-        }
-      </div>
-      }
-    </div>
-    <div class="my-1 py-1">
-      <label for="email" class="fw-bold">Password</label>
-      <input
-        formControlName="password"
-        id="password"
-        type="text"
-        class="form-control"
-        [ngClass]="{
-          'is-invalid': CheckFieldInvalid('password'),
-          'is-valid': CheckFieldValid('password')
-        }"
-      />
-      @if(registerform.get('password')?.errors&&registerform.get('password')?.touched){
-      <div class="text-danger mt-1">
-        @if(registerform.get('password')?.getError('required')){
-        <p>password Is Required</p>
-        } @if(registerform.get('password')?.getError('pattern')){
-        <p>must be at least 6 chars</p>
-        }
-      </div>
-      }
-    </div>
-    <div class="my-1 py-1">
-      <label for="email" class="fw-bold">rePassword</label>
-      <input
-        formControlName="rePassword"
-        id="rePassword"
-        type="text"
-        class="form-control"
-        [ngClass]="{
-          'is-invalid': CheckFieldInvalid('rePassword'),
-          'is-valid': CheckFieldValid('rePassword')
-        }"
-      />
-      @if(registerform.getError('mismatch')){
-      <div class="text-danger mt-1">
-        <p>password confirmation not match</p>
-      </div>
-      }
-    </div>
+      <ul class="brand-points">
+        <li>
+          <span class="point-icon"><i class="fa-solid fa-bolt"></i></span>
+          Sign up in under a minute
+        </li>
+        <li>
+          <span class="point-icon"><i class="fa-solid fa-heart"></i></span>
+          Save favourites to your wishlist
+        </li>
+        <li>
+          <span class="point-icon"><i class="fa-solid fa-box-open"></i></span>
+          Track every order in one place
+        </li>
+      </ul>
+    </aside>
 
-    <div class="my-1 py-1">
-      <label for="email" class="fw-bold">phone</label>
-      <input
-        [ngClass]="{
-          'is-invalid': CheckFieldInvalid('phone'),
-          'is-valid': CheckFieldValid('phone')
-        }"
-        formControlName="phone"
-        id="phone"
-        type="text"
-        class="form-control"
-      />
-      @if(registerform.get('phone')?.errors&&registerform.get('phone')?.touched){
-      <div class="text-danger mt-1">
-        @if(registerform.get('phone')?.getError('required')){
-        <p>phone Is Required</p>
-        } @else if(registerform.get('phone')?.getError('pattern')){
-        <p>accept only egypt phone numbers</p>
-        }
+    <div class="form-panel">
+      <div class="form-head">
+        <h1>Register</h1>
+        <p>Fill in your details to get started.</p>
       </div>
-      }
-    </div>
 
-    <div class="center center2">
-      <button type="submit" class="OrderButton">
-        Register @if(isloading){
-        <span><i class="fas fa-spin fa-spinner"></i></span>
-        }
-      </button>
+      <form [formGroup]="registerform" (ngSubmit)="registerSubmit()" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="name" class="field-label">Full name</label>
+            <div class="input-wrap">
+              <i class="fa-regular fa-user lead-icon"></i>
+              <input
+                formControlName="name"
+                id="name"
+                type="text"
+                class="form-control"
+                autocomplete="name"
+                placeholder="John Doe"
+                [ngClass]="{
+                  'is-valid': CheckFieldValid('name'),
+                  'is-invalid': CheckFieldInvalid('name')
+                }"
+              />
+            </div>
+            @if (registerform.get('name')?.errors && registerform.get('name')?.touched) {
+              <div class="field-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                @if (registerform.get('name')?.getError('required')) {
+                  <span>Name is required</span>
+                } @else if (registerform.get('name')?.getError('minlength')) {
+                  <span>Name must be at least 3 characters</span>
+                } @else if (registerform.get('name')?.getError('maxlength')) {
+                  <span>Name must be 20 characters or fewer</span>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="field">
+            <label for="phone" class="field-label">Phone number</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-phone lead-icon"></i>
+              <input
+                formControlName="phone"
+                id="phone"
+                type="tel"
+                class="form-control"
+                autocomplete="tel"
+                placeholder="01012345678"
+                [ngClass]="{
+                  'is-invalid': CheckFieldInvalid('phone'),
+                  'is-valid': CheckFieldValid('phone')
+                }"
+              />
+            </div>
+            @if (registerform.get('phone')?.errors && registerform.get('phone')?.touched) {
+              <div class="field-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                @if (registerform.get('phone')?.getError('required')) {
+                  <span>Phone number is required</span>
+                } @else if (registerform.get('phone')?.getError('pattern')) {
+                  <span>Enter a valid Egyptian mobile number</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email" class="field-label">Email address</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope lead-icon"></i>
+            <input
+              formControlName="email"
+              id="email"
+              type="email"
+              class="form-control"
+              autocomplete="email"
+              placeholder="name@example.com"
+              [ngClass]="{
+                'is-invalid': CheckFieldInvalid('email'),
+                'is-valid': CheckFieldValid('email')
+              }"
+            />
+          </div>
+          @if (registerform.get('email')?.errors && registerform.get('email')?.touched) {
+            <div class="field-error">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              @if (registerform.get('email')?.getError('required')) {
+                <span>Email is required</span>
+              } @else if (registerform.get('email')?.getError('email')) {
+                <span>Please enter a valid email address</span>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="password" class="field-label">Password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock lead-icon"></i>
+              <input
+                formControlName="password"
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                autocomplete="new-password"
+                placeholder="Create a password"
+                [ngClass]="{
+                  'is-invalid': CheckFieldInvalid('password'),
+                  'is-valid': CheckFieldValid('password')
+                }"
+              />
+              <button
+                type="button"
+                class="toggle-pass"
+                (click)="showPassword = !showPassword"
+                [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+              >
+                <i class="fa-regular" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+              </button>
+            </div>
+            @if (registerform.get('password')?.value) {
+              <div class="strength" [class]="'strength s' + passwordStrength.score">
+                <div class="bars"><span></span><span></span><span></span><span></span></div>
+                <span class="label">{{ passwordStrength.label }}</span>
+              </div>
+            }
+            @if (registerform.get('password')?.errors && registerform.get('password')?.touched) {
+              <div class="field-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                @if (registerform.get('password')?.getError('required')) {
+                  <span>Password is required</span>
+                } @else if (registerform.get('password')?.getError('pattern')) {
+                  <span>Use at least 6 letters, numbers or underscores</span>
+                }
+              </div>
+            } @else if (!registerform.get('password')?.value) {
+              <p class="field-hint">At least 6 letters, numbers or underscores.</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="rePassword" class="field-label">Confirm password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-shield-halved lead-icon"></i>
+              <input
+                formControlName="rePassword"
+                id="rePassword"
+                [type]="showRePassword ? 'text' : 'password'"
+                class="form-control"
+                autocomplete="new-password"
+                placeholder="Repeat your password"
+                [ngClass]="{
+                  'is-invalid': CheckFieldInvalid('rePassword') || showMismatch,
+                  'is-valid': CheckFieldValid('rePassword') && !showMismatch
+                }"
+              />
+              <button
+                type="button"
+                class="toggle-pass"
+                (click)="showRePassword = !showRePassword"
+                [attr.aria-label]="showRePassword ? 'Hide password' : 'Show password'"
+              >
+                <i class="fa-regular" [class.fa-eye]="!showRePassword" [class.fa-eye-slash]="showRePassword"></i>
+              </button>
+            </div>
+            @if (showMismatch) {
+              <div class="field-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Passwords do not match</span>
+              </div>
+            } @else if (registerform.get('rePassword')?.errors && registerform.get('rePassword')?.touched) {
+              <div class="field-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Please confirm your password</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="isloading">
+          @if (isloading) {
+            <i class="fas fa-spin fa-spinner"></i> Creating account...
+          } @else {
+            Create account
+          }
+        </button>
+
+        <p class="switch-line">
+          Already have an account?
+          <a routerLink="/auth/login">Sign in</a>
+        </p>
+      </form>
     </div>
-    <a routerLink="/auth/login" class="fw-bolder cr text-end mt-3 mx-1 d-block">
-      have an account? Sign in
-    </a>
-  </form>
+  </div>
 </section>

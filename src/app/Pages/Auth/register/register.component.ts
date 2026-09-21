@@ -12,9 +12,29 @@ import { RoutingModule } from '../../../core/Shared/Module/routing/routing.modul
   selector: 'app-register',
   imports: [CommonModule,ReactiveFormsModule,RoutingModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['../auth-shared.scss', './register.component.scss']
 })
 export class RegisterComponent {
+  showPassword = false;
+  showRePassword = false;
+
+  get showMismatch(): boolean {
+    const re = this.registerform.get('rePassword');
+    return !!re && !!re.value && (re.touched || re.dirty) && !!this.registerform.getError('mismatch');
+  }
+
+  get passwordStrength(): { score: number; label: string } {
+    const value: string = this.registerform.get('password')?.value ?? '';
+    let score = 0;
+    if (value.length >= 6) score++;
+    if (value.length >= 10) score++;
+    if (/[a-z]/.test(value) && /[A-Z]/.test(value)) score++;
+    if (/\d/.test(value)) score++;
+    if (value.length < 6) score = 1;
+    const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+    return { score, label: labels[score] };
+  }
+
   private readonly _Auth=inject(AuthService);
   private readonly _Router=inject(Router);
    private readonly _ToastrService = inject(ToastrService);
