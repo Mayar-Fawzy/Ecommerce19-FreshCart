@@ -1,0 +1,216 @@
+$hero-height: clamp(360px, 38vw, 480px);
+$gap: 1rem;
+
+:host {
+  display: block;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: $gap;
+
+  @media (max-width: 991.98px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &__carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--fc-radius-lg);
+  }
+
+  &__promos {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: $gap;
+
+    @media (max-width: 991.98px) {
+      grid-template-rows: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 575.98px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+
+// ---------- Slide ----------
+.hero-slide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: $hero-height;
+  background: var(--tone);
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+  }
+
+  // Tone-matched wash keeps copy legible where the product overlaps on narrow screens.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--tone) 0%, color-mix(in srgb, var(--tone) 70%, transparent) 45%, transparent 70%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: min(30rem, 62%);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--fc-radius-pill);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(6px);
+    color: var(--fc-primary-hover);
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--fc-primary);
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.875rem;
+    color: var(--fc-ink);
+    font-family: var(--fc-font-display);
+    font-size: clamp(1.75rem, 1rem + 2.4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  &__description {
+    margin: 0 0 1.75rem;
+    color: #4b5563;
+    font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.075rem);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 575.98px) {
+    &__content {
+      max-width: 100%;
+    }
+
+    &::after {
+      background: linear-gradient(90deg, var(--tone) 0%, color-mix(in srgb, var(--tone) 85%, transparent) 60%, color-mix(in srgb, var(--tone) 30%, transparent) 100%);
+    }
+  }
+}
+
+// Owl dots, restyled as pill indicators inside the slide.
+:host ::ng-deep .hero__carousel .owl-theme .owl-dots {
+  position: absolute;
+  left: clamp(1.5rem, 4vw, 3.5rem);
+  bottom: 1.25rem;
+  margin: 0;
+  display: flex;
+  gap: 6px;
+
+  .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 0;
+    background: rgba(17, 24, 39, 0.2);
+    transition: width 0.3s var(--fc-ease), background-color 0.3s var(--fc-ease);
+  }
+
+  .owl-dot.active span,
+  .owl-dot:hover span {
+    width: 28px;
+    background: var(--fc-primary);
+  }
+}
+
+// ---------- Promo tile ----------
+.promo-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 180px;
+  overflow: hidden;
+  border-radius: var(--fc-radius-lg);
+  background: #f5f5f3;
+  isolation: isolate;
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+    transition: transform 0.6s var(--fc-ease);
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    max-width: 55%;
+    padding: 1.5rem;
+  }
+
+  &__eyebrow {
+    color: var(--fc-primary-hover);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0 0 0.5rem;
+    color: var(--fc-ink);
+    font-family: var(--fc-font-display);
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--fc-ink);
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--fc-primary);
+    padding-bottom: 2px;
+
+    i {
+      font-size: 0.75em;
+      transition: transform 0.2s var(--fc-ease);
+    }
+  }
+
+  &:hover &__cta i {
+    transform: translateX(3px);
+  }
+}

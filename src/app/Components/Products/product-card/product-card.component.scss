@@ -1,0 +1,220 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--fc-border);
+  border-radius: var(--fc-radius);
+  background: var(--fc-surface);
+  transition: transform 0.3s var(--fc-ease), box-shadow 0.3s var(--fc-ease),
+    border-color 0.3s var(--fc-ease);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: transparent;
+    box-shadow: var(--fc-shadow-lg);
+  }
+
+  // ---------- Media ----------
+  &__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--fc-surface-muted);
+  }
+
+  &__image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--fc-ease);
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+  }
+
+  &__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--fc-radius-pill);
+    background: var(--fc-danger);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  &__quick-actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.25s var(--fc-ease), transform 0.25s var(--fc-ease);
+  }
+
+  &:hover &__quick-actions,
+  &:focus-within &__quick-actions {
+    opacity: 1;
+    transform: none;
+  }
+
+  &__quick-btn {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--fc-ink);
+    box-shadow: var(--fc-shadow-md);
+    cursor: pointer;
+    transition: background-color 0.2s var(--fc-ease), color 0.2s var(--fc-ease);
+
+    &:hover {
+      background: var(--fc-ink);
+      color: #fff !important;
+    }
+
+    &.is-active {
+      color: var(--fc-danger);
+
+      &:hover {
+        background: #fff;
+        color: var(--fc-danger) !important;
+      }
+    }
+
+    &:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--fc-primary) 40%, transparent);
+    }
+  }
+
+  // ---------- Body ----------
+  &__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem 1.1rem;
+  }
+
+  &__category {
+    color: var(--fc-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: var(--fc-font-display);
+    font-size: 0.975rem;
+    font-weight: 600;
+    line-height: 1.4;
+
+    a {
+      display: -webkit-box;
+      min-height: calc(1.4em * 2);
+      overflow: hidden;
+      color: var(--fc-ink);
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  &__price-current {
+    color: var(--fc-ink);
+    font-family: var(--fc-font-display);
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+
+  &__price-old {
+    color: var(--fc-ink-subtle);
+    font-size: 0.8rem;
+    text-decoration: line-through;
+  }
+
+  &__cart-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 76px;
+    height: 40px;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: var(--fc-radius-pill);
+    background: var(--fc-primary-soft);
+    color: var(--fc-primary-hover);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s var(--fc-ease), color 0.2s var(--fc-ease),
+      transform 0.15s var(--fc-ease);
+
+    i {
+      font-size: 0.8rem;
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--fc-primary);
+      color: #fff;
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.96);
+    }
+
+    &:disabled {
+      cursor: progress;
+    }
+
+    &:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--fc-primary) 40%, transparent);
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Touch devices have no hover — keep quick actions visible.
+@media (hover: none) {
+  .product-card__quick-actions {
+    opacity: 1;
+    transform: none;
+  }
+}

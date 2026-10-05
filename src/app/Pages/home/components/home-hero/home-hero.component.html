@@ -1,0 +1,46 @@
+<section class="hero" aria-label="Featured offers">
+  <div class="hero__carousel">
+    <owl-carousel-o [options]="carouselOptions">
+      @for (slide of slides(); track slide.image; let first = $first) {
+        <ng-template carouselSlide [id]="'hero-' + $index">
+          <article class="hero-slide" [style.--tone]="slide.tone">
+            <img
+              class="hero-slide__image"
+              [src]="slide.image"
+              alt=""
+              [attr.fetchpriority]="first ? 'high' : null"
+              [attr.loading]="first ? 'eager' : 'lazy'"
+            />
+            <div class="hero-slide__content">
+              <span class="hero-slide__eyebrow">{{ slide.eyebrow }}</span>
+              <h1 class="hero-slide__title">{{ slide.title }}</h1>
+              <p class="hero-slide__description">{{ slide.description }}</p>
+              <a class="fc-btn fc-btn--primary" [routerLink]="slide.cta.link">
+                {{ slide.cta.label }}
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+
+  @if (promos().length) {
+    <div class="hero__promos">
+      @for (promo of promos(); track promo.image) {
+        <a class="promo-tile" [routerLink]="promo.cta.link">
+          <img class="promo-tile__image" [src]="promo.image" alt="" loading="lazy" />
+          <div class="promo-tile__content">
+            <span class="promo-tile__eyebrow">{{ promo.eyebrow }}</span>
+            <h2 class="promo-tile__title">{{ promo.title }}</h2>
+            <span class="promo-tile__cta">
+              {{ promo.cta.label }}
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+  }
+</section>

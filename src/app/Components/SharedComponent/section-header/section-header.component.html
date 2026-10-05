@@ -1,0 +1,21 @@
+<header class="section-header">
+  <div class="section-header__text">
+    @if (eyebrow()) {
+      <span class="section-header__eyebrow">{{ eyebrow() }}</span>
+    }
+    <h2 class="section-header__title">{{ heading() }}</h2>
+    @if (subtitle()) {
+      <p class="section-header__subtitle">{{ subtitle() }}</p>
+    }
+  </div>
+
+  <div class="section-header__actions">
+    <ng-content />
+    @if (link() && linkLabel()) {
+      <a class="section-header__link" [routerLink]="link()">
+        {{ linkLabel() }}
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    }
+  </div>
+</header>

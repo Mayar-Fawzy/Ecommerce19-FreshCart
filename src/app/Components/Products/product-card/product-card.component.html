@@ -1,0 +1,70 @@
+@let item = product();
+
+<article class="product-card">
+  <div class="product-card__media">
+    <a class="product-card__image-link" [routerLink]="detailsLink()" [attr.aria-label]="item.title">
+      <img
+        class="product-card__image"
+        [src]="item.imageCover"
+        [alt]="item.title"
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+
+    @if (hasDiscount()) {
+      <span class="product-card__badge">-{{ discountPercent() }}%</span>
+    }
+
+    <div class="product-card__quick-actions">
+      <button
+        type="button"
+        class="product-card__quick-btn"
+        [class.is-active]="isWishlisted()"
+        [attr.aria-pressed]="isWishlisted()"
+        aria-label="Add to wishlist"
+        (click)="addToWishlist()"
+      >
+        <i [class]="isWishlisted() ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" aria-hidden="true"></i>
+      </button>
+      <a class="product-card__quick-btn" [routerLink]="detailsLink()" aria-label="Quick view">
+        <i class="fa-regular fa-eye" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="product-card__body">
+    <span class="product-card__category">{{ item.category.name }}</span>
+
+    <h3 class="product-card__title">
+      <a [routerLink]="detailsLink()" [title]="item.title">{{ item.title }}</a>
+    </h3>
+
+    <app-star-rating [value]="item.ratingsAverage" [count]="item.ratingsQuantity" />
+
+    <div class="product-card__footer">
+      <div class="product-card__price">
+        <span class="product-card__price-current">{{ finalPrice() | currency: 'USD' : 'symbol' : '1.0-0' }}</span>
+        @if (hasDiscount()) {
+          <span class="product-card__price-old">{{ item.price | currency: 'USD' : 'symbol' : '1.0-0' }}</span>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="product-card__cart-btn"
+        [class.is-loading]="isAddingToCart()"
+        [disabled]="isAddingToCart()"
+        aria-label="Add to cart"
+        (click)="addToCart()"
+      >
+        @if (isAddingToCart()) {
+          <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+        } @else {
+          <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          <span class="product-card__cart-label">Add</span>
+        }
+      </button>
+    </div>
+  </div>
+</article>

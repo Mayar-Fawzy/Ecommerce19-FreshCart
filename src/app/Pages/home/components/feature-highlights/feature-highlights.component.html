@@ -1,0 +1,11 @@
+<ul class="features" role="list">
+  @for (feature of features(); track feature.title) {
+    <li class="feature">
+      <span class="feature__icon" aria-hidden="true"><i [class]="feature.icon"></i></span>
+      <div>
+        <h3 class="feature__title">{{ feature.title }}</h3>
+        <p class="feature__description">{{ feature.description }}</p>
+      </div>
+    </li>
+  }
+</ul>

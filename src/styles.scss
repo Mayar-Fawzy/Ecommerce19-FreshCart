@@ -8,10 +8,10 @@
 a{
     text-decoration: none;
     color:var(--defultColor);
- &:hover{
+ &:not(.fc-btn):hover{
     color: var(--main-color) !important;
  }
-    
+
 }
 :root{
     --main-color: rgb(10, 173, 10);
@@ -25,6 +25,94 @@ a{
     --error:#ff4d4d8e;
     --defultColor:#000;
 
+    // ---- FreshCart design tokens ----
+    --fc-primary: #0aad0a;
+    --fc-primary-hover: #088f08;
+    --fc-primary-soft: #e9f7e9;
+    --fc-accent: #ff7a45;
+    --fc-danger: #e5484d;
+
+    --fc-ink: #111827;
+    --fc-ink-muted: #6b7280;
+    --fc-ink-subtle: #9ca3af;
+    --fc-border: #e9edf1;
+    --fc-surface: #ffffff;
+    --fc-surface-muted: #f5f7f6;
+
+    --fc-radius-sm: 10px;
+    --fc-radius: 16px;
+    --fc-radius-lg: 24px;
+    --fc-radius-pill: 999px;
+
+    --fc-shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+    --fc-shadow-md: 0 8px 24px -8px rgba(17, 24, 39, 0.12);
+    --fc-shadow-lg: 0 20px 40px -12px rgba(17, 24, 39, 0.18);
+
+    --fc-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --fc-font-display: "Plus Jakarta Sans", "Varela Round", sans-serif;
+}
+
+// ---- Shared button primitives ----
+.fc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--fc-radius-pill);
+    font-family: var(--fc-font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s var(--fc-ease), color 0.2s var(--fc-ease),
+      transform 0.2s var(--fc-ease), box-shadow 0.2s var(--fc-ease);
+
+    i { font-size: 0.85em; transition: transform 0.2s var(--fc-ease); }
+    &:hover i.fa-arrow-right { transform: translateX(3px); }
+    &:active { transform: scale(0.98); }
+    &:focus-visible { outline: 3px solid color-mix(in srgb, var(--fc-primary) 40%, transparent); outline-offset: 2px; }
+
+    &--primary {
+        background: var(--fc-primary);
+        color: #fff;
+        box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--fc-primary) 70%, transparent);
+        &:hover { background: var(--fc-primary-hover); color: #fff; }
+    }
+    &--light {
+        background: #fff;
+        color: var(--fc-ink);
+        &:hover { background: var(--fc-primary-soft); color: var(--fc-primary-hover); }
+    }
+    &--ghost {
+        background: transparent;
+        color: var(--fc-ink);
+        border-color: var(--fc-border);
+        &:hover { border-color: var(--fc-primary); color: var(--fc-primary); }
+    }
+}
+
+.fc-icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--fc-border);
+    border-radius: 50%;
+    background: var(--fc-surface);
+    color: var(--fc-ink);
+    cursor: pointer;
+    transition: all 0.2s var(--fc-ease);
+
+    &:hover { border-color: var(--fc-primary); background: var(--fc-primary); color: #fff; }
+    &:focus-visible { outline: 3px solid color-mix(in srgb, var(--fc-primary) 40%, transparent); outline-offset: 2px; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 ul{
     list-style: none;

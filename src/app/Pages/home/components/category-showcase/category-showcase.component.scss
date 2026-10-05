@@ -1,0 +1,113 @@
+:host {
+  display: block;
+}
+
+.carousel-nav {
+  display: flex;
+  gap: 0.5rem;
+
+  .fc-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-color: transparent;
+    background: var(--fc-surface-muted);
+    font-size: 0.8rem;
+
+    &:hover {
+      background: var(--fc-primary);
+      color: #fff;
+    }
+  }
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.25rem 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--fc-radius);
+  background: var(--fc-surface-muted);
+  text-align: center;
+  transition: background-color 0.25s var(--fc-ease), border-color 0.25s var(--fc-ease);
+
+  &__media {
+    width: clamp(64px, 7vw, 88px);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: var(--fc-shadow-sm);
+    transition: transform 0.3s var(--fc-ease);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__name {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--fc-ink);
+    font-family: var(--fc-font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    transition: color 0.2s var(--fc-ease);
+  }
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--fc-primary) 25%, transparent);
+    background: var(--fc-primary-soft);
+  }
+
+  &:hover &__media {
+    transform: scale(1.06);
+  }
+
+  &:hover &__name {
+    color: var(--fc-primary-hover);
+  }
+
+  &:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--fc-primary) 40%, transparent);
+    outline-offset: 2px;
+  }
+}
+
+.category-skeletons {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 16px;
+
+  // Mirror the carousel's items-per-breakpoint and show a single row only.
+  @media (max-width: 1199.98px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    .category-skeletons__item:nth-child(n + 7) { display: none; }
+  }
+  @media (max-width: 991.98px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    .category-skeletons__item:nth-child(n + 6) { display: none; }
+  }
+  @media (max-width: 767.98px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    .category-skeletons__item:nth-child(n + 5) { display: none; }
+  }
+  @media (max-width: 575.98px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    .category-skeletons__item:nth-child(n + 4) { display: none; }
+  }
+
+  &__item {
+    padding: 1.25rem 0.75rem 1rem;
+    border-radius: var(--fc-radius);
+    background: var(--fc-surface-muted);
+  }
+}

@@ -1,0 +1,17 @@
+<div class="rating" role="img" [attr.aria-label]="'Rated ' + value() + ' out of 5'">
+  <span class="rating__stars" aria-hidden="true">
+    @for (star of stars(); track $index) {
+      @switch (star) {
+        @case ('full') { <i class="fa-solid fa-star"></i> }
+        @case ('half') { <i class="fa-solid fa-star-half-stroke"></i> }
+        @default { <i class="fa-regular fa-star rating__empty"></i> }
+      }
+    }
+  </span>
+  <span class="rating__score" aria-hidden="true">
+    {{ value() | number: '1.1-1' }}
+    @if (count() !== undefined) {
+      <span class="rating__count">({{ count() }})</span>
+    }
+  </span>
+</div>

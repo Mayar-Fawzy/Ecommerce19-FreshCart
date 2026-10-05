@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.home {
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+
+  &__section {
+    padding-block: clamp(2rem, 4vw, 3.5rem) 0;
+
+    &--hero {
+      padding-top: 1rem;
+    }
+
+    &--tight {
+      padding-top: 1rem;
+    }
+  }
+
+  // Full-bleed muted band to give the product grid its own visual "room".
+  &__band {
+    margin-top: clamp(2rem, 4vw, 3.5rem);
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+    background: var(--fc-surface-muted);
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 3rem 1rem;
+    border: 1px dashed var(--fc-border);
+    border-radius: var(--fc-radius);
+    background: var(--fc-surface);
+    color: var(--fc-ink-muted);
+    text-align: center;
+
+    i {
+      color: var(--fc-primary);
+      font-size: 1.25rem;
+    }
+  }
+}

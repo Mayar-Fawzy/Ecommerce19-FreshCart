@@ -1,0 +1,21 @@
+<section class="promo" [style.--promo-image]="'url(' + image() + ')'">
+  <div class="promo__content">
+    @if (eyebrow()) {
+      <span class="promo__eyebrow">{{ eyebrow() }}</span>
+    }
+    <h2 class="promo__title">{{ heading() }}</h2>
+    @if (description()) {
+      <p class="promo__description">{{ description() }}</p>
+    }
+
+    <div class="promo__actions">
+      <a class="fc-btn fc-btn--light" [routerLink]="primaryAction().link">
+        {{ primaryAction().label }}
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      @if (secondaryAction(); as secondary) {
+        <a class="fc-btn promo__secondary" [routerLink]="secondary.link">{{ secondary.label }}</a>
+      }
+    </div>
+  </div>
+</section>

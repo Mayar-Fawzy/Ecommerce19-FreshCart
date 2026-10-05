@@ -1,6 +1,45 @@
-<app-slider-header/>
+<div class="home">
+  <div class="container home__section home__section--hero">
+    <app-home-hero [slides]="heroSlides" [promos]="heroPromos" />
+  </div>
 
-<app-slider-category/>
+  <div class="container home__section home__section--tight">
+    <app-feature-highlights [features]="features" />
+  </div>
 
-<app-card-product [CardProducts]="ProductList"></app-card-product>
+  <section class="container home__section">
+    <app-category-showcase [categories]="categories()" [loading]="isLoadingCategories()" />
+  </section>
 
+  <section class="home__band">
+    <div class="container home__section">
+      <app-section-header
+        eyebrow="Trending now"
+        heading="Popular products"
+        subtitle="Our customers' favourites this week — handpicked and ready to ship."
+        linkLabel="View all products"
+        link="/Product"
+      />
+
+      @if (!isLoadingProducts() && !products().length) {
+        <p class="home__empty">
+          <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
+          We couldn't load products right now. Please try again shortly.
+        </p>
+      } @else {
+        <app-card-product [CardProducts]="products()" [loading]="isLoadingProducts()" />
+      }
+    </div>
+  </section>
+
+  <div class="container home__section">
+    <app-promo-banner
+      image="Imges/banner-4.jpeg"
+      eyebrow="Why FreshCart"
+      heading="Your weekly shop, done in minutes"
+      description="Thousands of products from trusted brands, fair prices and fast delivery — all in one place."
+      [primaryAction]="{ label: 'Start shopping', link: '/Product' }"
+      [secondaryAction]="{ label: 'Browse brands', link: '/Brands' }"
+    />
+  </div>
+</div>

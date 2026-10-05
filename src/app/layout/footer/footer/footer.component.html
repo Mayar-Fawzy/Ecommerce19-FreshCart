@@ -1,122 +1,104 @@
-<footer class="footer mb-0 pb-0 p-0 m-0">
-  <div class="">
-    <div class="Contacts my-1">
-      <div class="US">
-        <div class="icon">
-          <i class="fa-solid fs-2 fa-location-dot"></i>
-        </div>
-        <div class="Info">
-          <strong> <h4>Find Us</h4></strong>
-
-          <p class="pmute">Egypt, alexandria</p>
-        </div>
+<footer class="footer">
+  <div class="container">
+    <!-- Newsletter -->
+    <section class="newsletter" aria-labelledby="newsletter-title">
+      <div class="newsletter__text">
+        <h2 id="newsletter-title" class="newsletter__title">Get fresh deals in your inbox</h2>
+        <p class="newsletter__subtitle">Weekly offers, new arrivals and seasonal picks. No spam, unsubscribe anytime.</p>
       </div>
-      <div class="US">
-        <div class="icon">
-          <i class="fa-solid fs-2 fa-phone"></i>
-        </div>
-        <div class="Info">
-          <strong> <h4>Call us</h4></strong>
 
-          <p class="pmute">01278746444</p>
+      <form class="newsletter__form" (ngSubmit)="subscribe()" novalidate>
+        <label for="newsletter-email" class="visually-hidden">Email address</label>
+        <div class="newsletter__field" [class.is-invalid]="submitted() && email.invalid">
+          <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+          <input
+            id="newsletter-email"
+            type="email"
+            autocomplete="email"
+            placeholder="Enter your email address"
+            [formControl]="email"
+            [attr.aria-invalid]="submitted() && email.invalid"
+            aria-describedby="newsletter-error"
+          />
+          <button type="submit" class="fc-btn fc-btn--primary newsletter__submit">
+            Subscribe
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
         </div>
+        <p id="newsletter-error" class="newsletter__error" aria-live="polite">
+          @if (submitted() && email.invalid) {
+            {{ email.hasError('required') ? 'Please enter your email address.' : 'Please enter a valid email address.' }}
+          }
+        </p>
+      </form>
+    </section>
+
+    <!-- Main -->
+    <div class="footer__main">
+      <div class="footer__brand">
+        <a class="brand" routerLink="/home" aria-label="FreshCart home">
+          <span class="brand__icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+          <span class="brand__name">FreshCart</span>
+        </a>
+        <p class="footer__about">
+          Your neighbourhood grocery store, online. Fresh produce, everyday essentials and the brands you love — delivered fast.
+        </p>
+        <ul class="socials" role="list">
+          @for (social of socials; track social.label) {
+            <li>
+              <a class="socials__link" [href]="social.href" target="_blank" rel="noopener noreferrer" [attr.aria-label]="social.label">
+                <i [class]="social.icon" aria-hidden="true"></i>
+              </a>
+            </li>
+          }
+        </ul>
       </div>
-      <div class="US">
-        <div class="icon">
-          <i class="fa-regular fs-2 fa-envelope"></i>
-        </div>
-        <div class="Info">
-          <strong> <h4>Mail us</h4></strong>
 
-          <p class="pmute">dev&#64;mayora.com</p>
-        </div>
+      @for (group of linkGroups; track group.title) {
+        <nav class="footer__column" [attr.aria-label]="group.title">
+          <h3 class="footer__heading">{{ group.title }}</h3>
+          <ul class="footer__links" role="list">
+            @for (item of group.links; track item.link) {
+              <li><a [routerLink]="item.link">{{ item.label }}</a></li>
+            }
+          </ul>
+        </nav>
+      }
+
+      <div class="footer__column">
+        <h3 class="footer__heading">Get in touch</h3>
+        <ul class="contact" role="list">
+          @for (contact of contacts; track contact.label) {
+            <li class="contact__item">
+              <span class="contact__icon" aria-hidden="true"><i [class]="contact.icon"></i></span>
+              <div>
+                <span class="contact__label">{{ contact.label }}</span>
+                @if (contact.href) {
+                  <a class="contact__value" [href]="contact.href">{{ contact.value }}</a>
+                } @else {
+                  <span class="contact__value">{{ contact.value }}</span>
+                }
+              </div>
+            </li>
+          }
+        </ul>
       </div>
     </div>
-    <div class="greyLine"></div>
-    <div class="Contacts footerRes End">
-      <div class="Part">
-        <div class="First p-2">
-          <img
-            src="https://e-commerce-website-angular-seven.vercel.app/assets/images/logo.png"
-            alt=""
-          />
-        </div>
-        <div class="Second">
-          <p class="pmute">
-            Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do
-            eiusmod tempor incididuntut consec tetur adipisicing elit,Lorem
-            ipsum dolor sit amet.
-          </p>
-        </div>
-        <div class="third">
-          <div class="follow pt-2">
-            <h3><strong>Follow Us</strong></h3>
-          </div>
-          <div class="iconss">
-            <div class="facebook">
-              <i class="fab fs-5 fa-facebook-f"></i>
-            </div>
-            <div class="instagram">
-              <i class="fab fs-5 fa-instagram"></i>
-            </div>
-            <div class="twitter">
-              <i class="fab fs-5 fa-twitter"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="Part">
-        <div class="First p-2">
-          <h3><strong>Useful Links</strong></h3>
-          <div class="linee"></div>
-        </div>
-        <div class="Second">
-          <div class="info1 pt-4">
-            <h5 class="pmute m-0 p-1 h6 m-0 p-0 h6">Home</h5>
-            <h5
-              routerLink="/Brands"
-              routerLinkActive="router-link-active"
-              class="pmute m-0 p-1 h6"
-            >
-              services
-            </h5>
-            <h5 class="pmute m-0 p-1 h6">Contact</h5>
-            <h5 class="pmute m-0 p-1 h6">Our Services</h5>
-            <h5 class="pmute m-0 p-1 h6">Contact us</h5>
-          </div>
-          <div class="info2 pt-4">
-            <h5 class="pmute m-0 p-1 h6 m-0 h6">aAbout</h5>
-            <h5 class="pmute m-0 p-1 h6">Portfolio</h5>
-            <h5 class="pmute m-0 p-1 h6">About Us</h5>
-            <h5 class="pmute m-0 p-1 h6">Expert Team</h5>
-            <h5 class="pmute m-0 p-1 h6">Latest News</h5>
-          </div>
-        </div>
-      </div>
-      <div class="Part">
-        <div class="First p-2">
-          <h3><strong>Subscribe</strong></h3>
-          <div class="linee"></div>
-        </div>
 
-        <h5 class="pmute m-0 p-1 h6 m-0 p-0 h6">
-          Don’t miss to subscribe to our new feeds, kindly fill the form below.
-        </h5>
-
-        <div class="info2 pt-4 d-flex">
-          <input type="text" placeholder="EmailAddress" class="Inputt" />
-          <div class="send m-0 p-0">
-            <i class="fab fs-1 fa-telegram"></i>
-          </div>
-        </div>
-      </div>
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; {{ currentYear }} FreshCart. Built by <span class="footer__author">Mayar Mohsen</span>. All rights reserved.
+      </p>
+      <ul class="payments" role="list" aria-label="Accepted payment methods">
+        @for (method of paymentMethods; track method.label) {
+          <li [title]="method.label">
+            <i [class]="method.icon" aria-hidden="true"></i>
+            <span class="visually-hidden">{{ method.label }}</span>
+          </li>
+        }
+        <li class="payments__cash"><i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i> Cash on delivery</li>
+      </ul>
     </div>
   </div>
-
-  <footer class="EEnnd pb-0">
-    <h6 class="m-0">
-      Copyright &copy; Feb 6, 2025 All Rights Reserved
-      <span class="author">Mayar Mohsen</span>
-    </h6>
-  </footer>
 </footer>

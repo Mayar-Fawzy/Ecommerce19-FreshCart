@@ -1,0 +1,41 @@
+<app-section-header
+  eyebrow="Explore"
+  heading="Shop by category"
+  linkLabel="All categories"
+  link="/Categories"
+>
+  @if (!loading() && categories().length) {
+    <div class="carousel-nav">
+      <button type="button" class="fc-icon-btn" aria-label="Previous categories" (click)="prev()">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="fc-icon-btn" aria-label="Next categories" (click)="next()">
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  }
+</app-section-header>
+
+@if (loading()) {
+  <div class="category-skeletons" aria-hidden="true">
+    @for (_ of skeletons; track $index) {
+      <div class="category-skeletons__item">
+        <ngx-skeleton-loader [theme]="{ display: 'block', width: '88px', height: '88px', 'border-radius': '50%', margin: '0 auto' }" />
+        <ngx-skeleton-loader [theme]="{ width: '60%', height: '12px', margin: '14px auto 0', display: 'block' }" />
+      </div>
+    }
+  </div>
+} @else {
+  <owl-carousel-o [options]="carouselOptions">
+    @for (category of categories(); track category._id) {
+      <ng-template carouselSlide [id]="category._id">
+        <a class="category-card" [routerLink]="['/CategoriesProducts', category._id]">
+          <div class="category-card__media">
+            <img class="category-card__image" [src]="category.image" [alt]="category.name" loading="lazy" />
+          </div>
+          <span class="category-card__name">{{ category.name }}</span>
+        </a>
+      </ng-template>
+    }
+  </owl-carousel-o>
+}
